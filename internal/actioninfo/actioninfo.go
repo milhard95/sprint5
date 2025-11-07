@@ -1,6 +1,9 @@
 package actioninfo
 
-import "log"
+import (
+	"fmt"
+	"log"
+)
 
 type DataParser interface {
 	Parse(datastring string) error
@@ -15,7 +18,11 @@ func Info(dataset []string, dp DataParser) {
 			continue
 		}
 
-		dp.ActionInfo()
+		result, err := dp.ActionInfo()
+		if err != nil {
+			log.Println(err)
+		}
 
+		fmt.Println(result)
 	}
 }
